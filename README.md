@@ -39,4 +39,16 @@ Performs a geocoding on all objects
 $ python manage.py batch_geocode
 ```
 
+### As an helper for caching
+
+```python
+import django_geocoder as geocoder
+
+# calls `geocoder.get()` under the hoods
+result = geocoder.get("Some address")
+
+# same as above, with caching
+result = geocoder.get_cached("Some address")
+```
+
 [1]: (https://github.com/DenisCarriere/geocoder)
