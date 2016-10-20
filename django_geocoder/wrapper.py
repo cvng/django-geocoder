@@ -1,31 +1,17 @@
-import geocoder as _geocoder
-from django.conf import settings
-from memoize import memoize
-
-__all__ = ['geocoder']
+import geocoder
+from django.core.cache import cache
 
 
-class Geocoder(object):
+def get_cached(location, **kwargs):
     """
-    Simple wrapper that adds caching support to geocoding providers.
+    Simple wrapper that adds Django caching support to geocoder.
     """
+    result = cache.get(location)
 
-    @memoize()
-    def get(self, location, **kwargs):
-        default_provider = {
-            'provider': 'google',
-            'language': 'fr',
-            'key': getattr(settings, 'GOOGLEMAPS_BACKEND_KEY', None)}
+    # Result is not cached or wrong
+    if not result or not result.ok:
+        result = geocoder.get(location, **kwargs)
+        if result.ok:
+            cache.set(location, result)
 
-        provider = {}
-        provider.update(default_provider)
-        provider.update(kwargs)
-        result = _geocoder.get(location, method='geocode', **provider)
-
-        if not result.ok:
-            result = _geocoder.get(location, method='geocode', **default_provider)
-
-        return result
-
-
-geocoder = Geocoder()
+    return result
