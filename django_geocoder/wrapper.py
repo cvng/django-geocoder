@@ -4,7 +4,7 @@ from django.core.cache import cache
 
 def get_cached(location, **kwargs):
     """
-    Simple wrapper that adds Django caching support to geocoder.
+    Simple wrapper that adds Django caching support to 'geocoder.get()'.
     """
     result = cache.get(location)
 

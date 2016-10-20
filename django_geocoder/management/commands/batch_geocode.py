@@ -13,5 +13,6 @@ class Command(BaseCommand):
 
         self.stdout.write("Loaded %s" % model)
         for i, obj in enumerate(qs):
-            obj.consolidate_geocoding(**options)
-            self.stdout.write("%s/%s, pk=%s, %s=%s" % (i + 1, qs.count(), obj.pk, model.geocoded_by, getattr(obj, model.geocoded_by)))
+            obj.geocode(**options)
+            self.stdout.write(
+                "%s/%s, pk=%s, %s=%s" % (i + 1, qs.count(), obj.pk, model.geocoded_by, getattr(obj, model.geocoded_by)))
