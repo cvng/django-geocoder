@@ -1,6 +1,6 @@
 import warnings
 
-from .wrapper import geocoder
+from django_geocoder.wrapper import get_cached
 
 
 class GeoMixin(object):
@@ -23,7 +23,7 @@ class GeoMixin(object):
         Do a backend geocoding if needed
         """
         if self.need_geocoding() or force:
-            result = geocoder.get(getattr(self, self.geocoded_by), provider='google')
+            result = get_cached(getattr(self, self.geocoded_by), provider='google')
             if result.status == 'OK':
                 for attribute, components in self.required_address_components.items():
                     for component in components:
@@ -37,5 +37,5 @@ class GeoMixin(object):
 
     def consolidate_geocoding(self, *args, **kwargs):
         warnings.warn(
-            "consolidate_geocoding() is deprecated. Use geocode() instead", DeprecationWarning)
+            "Usage of consolidate_geocoding() is deprecated. Use geocode() instead", DeprecationWarning)
         return self.geocode(*args, **kwargs)
