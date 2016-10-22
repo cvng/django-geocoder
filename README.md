@@ -1,5 +1,8 @@
 # django-geocoder
-Python [geocoder][1] wrapper for Django
+[![PyPI version](https://badge.fury.io/py/django-geocoder.svg)](https://badge.fury.io/py/django-geocoder)
+[![Build Status](https://travis-ci.org/cvng/django-geocoder.svg?branch=master)](https://travis-ci.org/cvng/django-geocoder)
+
+Python [geocoder][1] wrapper for Django, inspired by Ruby [geocoder][2].
 
 ## How it works
 
@@ -52,3 +55,4 @@ result = geocoder.get_cached("Some address")
 ```
 
 [1]: (https://github.com/DenisCarriere/geocoder)
+[2]: (https://github.com/alexreisner/geocoder)

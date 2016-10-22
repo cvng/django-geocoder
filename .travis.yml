@@ -1,0 +1,18 @@
+language: python
+python:
+    - 3.5
+sudo: false
+cache:
+  directories:
+    - $HOME/.cache/pip
+env:
+  matrix:
+    - TOXENV=py35-django19
+    - TOXENV=py35-django110
+  global:
+    - PYTHONWARNINGS=default,ignore::PendingDeprecationWarning,ignore::ResourceWarning
+matrix:
+  fast_finish: true
+install:
+  - pip install 'tox>=2.3.1'
+script: tox
