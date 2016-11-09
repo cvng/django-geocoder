@@ -3,7 +3,7 @@ from django.db import models
 from django_geocoder.mixins import GeoMixin
 
 
-class Place(models.Model, GeoMixin):
+class Place(GeoMixin, models.Model):
     address = models.CharField(max_length=255, blank=True, null=True)
     locality = models.CharField(max_length=255, blank=True, null=True)
     postal_code = models.CharField(max_length=255, blank=True, null=True)

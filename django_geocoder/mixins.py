@@ -39,3 +39,10 @@ class GeoMixin(object):
         warnings.warn(
             "Usage of consolidate_geocoding() is deprecated. Use geocode() instead", DeprecationWarning)
         return self.geocode(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        """
+        Extends model ``save()`` to allow dynamic geocoding
+        """
+        self.geocode()
+        return super(GeoMixin, self).save(*args, **kwargs)
